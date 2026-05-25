@@ -77,7 +77,7 @@ body{font-family:'Jost',sans-serif;background:var(--parch);color:var(--ink);over
 /* ── HERO ── */
 .hero{
   min-height:100vh;
-  background:var(--parch);
+  background:url('/hero-salveregina.jpg') center center / cover no-repeat;
   display:flex;flex-direction:column;align-items:center;justify-content:center;
   position:relative;overflow:hidden;
 }
