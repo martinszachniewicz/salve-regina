@@ -538,9 +538,9 @@ export default function SalveRegina() {
     return () => observer.disconnect();
   }, []);
 
-  const go = (id) => document.getElementById(id)?.scrollIntoView({behavior:"smooth",block:"start"});
+  const go = (id: string) => document.getElementById(id)?.scrollIntoView({behavior:"smooth",block:"start"});
 
-  const toggleCart = (id) => setCart(p => ({...p, [id]: p[id] ? 0 : 1}));
+  const toggleCart = (id: number) => setCart(p => ({...p, [id]: p[id] ? 0 : 1}));
   const cartCount  = Object.values(cart).filter(Boolean).length;
   const cartTotal  = WINES.reduce((s,w) => s + (cart[w.id]||0)*w.price, 0);
 
