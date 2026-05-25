@@ -441,7 +441,7 @@ function HaftBorder({ width = 700, primary = "#7A1C2E", accent = "#B8852A", ligh
 
 function HeraldEmblem({ size = 110, c = "#B8852A", opacity = 1 }) {
   const cx = size/2, cy = size/2, r = size*.4;
-  const pts8 = (rad) => Array.from({length:8},(_,i) => {
+  const pts8 = (rad: number) => Array.from({length:8},(_,i) => {
     const a = (i*Math.PI/4) - Math.PI/2;
     return `${cx+rad*Math.cos(a)},${cy+rad*Math.sin(a)}`;
   }).join(" ");
