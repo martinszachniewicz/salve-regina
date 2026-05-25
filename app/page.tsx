@@ -495,7 +495,7 @@ function BottleSVG({ color="#18100A" }) {
 
 function CrossStar({ size=60, c1="#7A1C2E", c2="#B8852A" }) {
   const cx=size/2, cy=size/2, r=size*.38;
-  const pts = (n,rad,offset=0) => Array.from({length:n},(_,i)=>{
+  const pts = (n: number, rad: number, offset=0) => Array.from({length:n},(_,i)=>{
     const a=(i*2*Math.PI/n)-Math.PI/2+offset;
     return `${cx+rad*Math.cos(a)},${cy+rad*Math.sin(a)}`;
   }).join(" ");
