@@ -512,7 +512,7 @@ function CrossStar({ size=60, c1="#7A1C2E", c2="#B8852A" }) {
 export default function SalveRegina() {
   const [scrolled, setScrolled]   = useState(false);
   const [activeNav, setActiveNav] = useState("hero");
-  const [cart, setCart]           = useState({});
+  const [cart, setCart] = useState<Record<number,number>>({});
   const revealRefs = useRef([]);
 
   useEffect(() => {
