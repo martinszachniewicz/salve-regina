@@ -94,7 +94,7 @@ body{font-family:'Jost',sans-serif;background:var(--parch);color:var(--ink);over
 /* ── HERO ── */
 .hero{
   min-height:100vh;
-  background:var(--parch);
+  background:url('/hero-salveregina.jpg') center center / cover no-repeat;
   display:flex;flex-direction:column;align-items:center;justify-content:center;
   position:relative;overflow:hidden;
 }
@@ -567,15 +567,18 @@ export default function SalveRegina() {
 
       {/* ── NAV ─────────────────────────────────── */}
       <nav className={`nav${scrolled?" scrolled":""}`}>
-        <a className="nav-logo" onClick={() => go("hero")}>
-          <span className="logo-main">Salve Regina</span>
-          <span className="logo-sub">Winnica · Lubelszczyzna</span>
-        </a>
         <ul className="nav-links">
-          {[["about","O nas"],["wines","Wina"],["shop","Sklep"],["contact","Kontakt"]].map(([id,lbl])=>(
+          {[["about","O nas"],["wines","Wina"]].map(([id,lbl])=>(
             <li key={id}><a className={activeNav===id?"active":""} onClick={()=>go(id)}>{lbl}</a></li>
           ))}
-          <li><a className="nav-cta" onClick={()=>go("shop")}>Zamów Wino</a></li>
+        </ul>
+        <a className="nav-logo" onClick={() => go("hero")}>
+          <img src="/salve-regina-logo-color-2026.png" alt="Salve Regina" style={{height:"64px",width:"auto"}} />
+        </a>
+        <ul className="nav-links">
+          {[["shop","Sklep"],["contact","Kontakt"]].map(([id,lbl])=>(
+            <li key={id}><a className={activeNav===id?"active":""} onClick={()=>go(id)}>{lbl}</a></li>
+          ))}
         </ul>
       </nav>
 
