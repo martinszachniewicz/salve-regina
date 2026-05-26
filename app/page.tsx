@@ -1,4 +1,3 @@
-"use client";
 import { useState, useEffect, useRef } from "react";
 
 /* ─────────────────────────────────────────────
@@ -39,33 +38,49 @@ body{font-family:'Jost',sans-serif;background:var(--parch);color:var(--ink);over
 ::-webkit-scrollbar-thumb{background:var(--bordo);opacity:.5;}
 
 /* ── NAV ── */
+/* ── ANNOUNCEMENT BAR ── */
+.ann-bar{
+  position:fixed;top:0;left:0;right:0;z-index:400;
+  background:var(--bordo);
+  padding:.55rem 5rem;
+  display:flex;align-items:center;justify-content:center;gap:1.5rem;
+}
+.ann-txt{font-family:'Cinzel',serif;font-size:.56rem;letter-spacing:.22em;color:rgba(238,227,198,.9);text-transform:uppercase;}
+.ann-btn{font-family:'Cinzel',serif;font-size:.52rem;letter-spacing:.2em;color:var(--parch);border:1px solid rgba(238,227,198,.45);padding:.28rem .9rem;cursor:pointer;background:transparent;transition:all .3s;text-transform:uppercase;white-space:nowrap;}
+.ann-btn:hover{background:rgba(238,227,198,.15);border-color:rgba(238,227,198,.7);}
+
+/* ── NAV ── */
 .nav{
-  position:fixed;top:0;left:0;right:0;z-index:300;
+  position:fixed;top:32px;left:0;right:0;z-index:300;
   padding:2rem 5rem;
   display:flex;align-items:center;justify-content:space-between;
   transition:all .5s cubic-bezier(.16,1,.3,1);
-  background:var(--bordo);
+  background:#FFFFFF;
+  border-bottom:1px solid rgba(0,0,0,.08);
+  padding:0 5rem;
+  height:80px;
 }
 .nav.scrolled{
-  padding:1rem 5rem;
-  background:rgba(24,16,10,.95);
-  backdrop-filter:blur(16px);
-  border-bottom:1px solid rgba(184,133,42,.15);
+  top:0;
+  padding:0 5rem;
+  height:72px;
+  background:#FFFFFF;
+  border-bottom:1px solid rgba(0,0,0,.1);
+  box-shadow:0 2px 16px rgba(0,0,0,.07);
 }
-.nav.scrolled .logo-main{color:var(--parch);}
-.nav.scrolled .nav-links a{color:rgba(238,227,198,.5);}
-.nav.scrolled .nav-links a:hover,.nav.scrolled .nav-links a.active{color:var(--gold2);}
-.nav.scrolled .nav-cta{border-color:rgba(184,133,42,.4) !important;color:var(--gold) !important;}
-.nav-logo{cursor:pointer;text-decoration:none;}
+.nav.scrolled .nav-links a{color:rgba(0,0,0,.6);}
+.nav.scrolled .nav-links a:hover,.nav.scrolled .nav-links a.active{color:var(--bordo);}
+.nav-logo{cursor:pointer;text-decoration:none;display:flex;align-items:center;}
 .logo-main{font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-weight:400;color:var(--parch);letter-spacing:.06em;display:block;line-height:1;transition:color .5s;}
 .logo-sub{font-family:'Cinzel',serif;font-size:.42rem;letter-spacing:.55em;color:var(--gold);display:block;margin-top:3px;text-transform:uppercase;}
-.nav-links{display:flex;gap:2.5rem;list-style:none;align-items:center;}
+.nav-links{display:flex;gap:2.8rem;list-style:none;align-items:center;}
+.nav-links.right{margin-left:0;}
 .nav-links a{
-  font-family:'Cinzel',serif;font-size:.52rem;letter-spacing:.28em;
-  color:rgba(238,227,198,.8);text-decoration:none;cursor:pointer;
+  font-family:'Cinzel',serif;font-size:.53rem;letter-spacing:.2em;
+  color:rgba(0,0,0,.65);text-decoration:none;cursor:pointer;
   text-transform:uppercase;transition:color .3s;
 }
-.nav-links a:hover,.nav-links a.active{color:var(--parch);}
+.nav-links a:hover,.nav-links a.active{color:var(--bordo);}
 .nav-cta{
   padding:.5rem 1.4rem;
   border:1px solid rgba(238,227,198,.5) !important;
@@ -77,7 +92,7 @@ body{font-family:'Jost',sans-serif;background:var(--parch);color:var(--ink);over
 /* ── HERO ── */
 .hero{
   min-height:100vh;
-  background:url('/hero-salveregina.jpg') center center / cover no-repeat;
+  background:var(--parch);
   display:flex;flex-direction:column;align-items:center;justify-content:center;
   position:relative;overflow:hidden;
 }
@@ -441,7 +456,7 @@ function HaftBorder({ width = 700, primary = "#7A1C2E", accent = "#B8852A", ligh
 
 function HeraldEmblem({ size = 110, c = "#B8852A", opacity = 1 }) {
   const cx = size/2, cy = size/2, r = size*.4;
-  const pts8 = (rad: number) => Array.from({length:8},(_,i) => {
+  const pts8 = (rad) => Array.from({length:8},(_,i) => {
     const a = (i*Math.PI/4) - Math.PI/2;
     return `${cx+rad*Math.cos(a)},${cy+rad*Math.sin(a)}`;
   }).join(" ");
@@ -495,7 +510,7 @@ function BottleSVG({ color="#18100A" }) {
 
 function CrossStar({ size=60, c1="#7A1C2E", c2="#B8852A" }) {
   const cx=size/2, cy=size/2, r=size*.38;
-  const pts = (n: number, rad: number, offset=0) => Array.from({length:n},(_,i)=>{
+  const pts = (n,rad,offset=0) => Array.from({length:n},(_,i)=>{
     const a=(i*2*Math.PI/n)-Math.PI/2+offset;
     return `${cx+rad*Math.cos(a)},${cy+rad*Math.sin(a)}`;
   }).join(" ");
@@ -512,7 +527,7 @@ function CrossStar({ size=60, c1="#7A1C2E", c2="#B8852A" }) {
 export default function SalveRegina() {
   const [scrolled, setScrolled]   = useState(false);
   const [activeNav, setActiveNav] = useState("hero");
-  const [cart, setCart] = useState<Record<number,number>>({});
+  const [cart, setCart]           = useState({});
   const revealRefs = useRef([]);
 
   useEffect(() => {
@@ -538,9 +553,9 @@ export default function SalveRegina() {
     return () => observer.disconnect();
   }, []);
 
-  const go = (id: string) => document.getElementById(id)?.scrollIntoView({behavior:"smooth",block:"start"});
+  const go = (id) => document.getElementById(id)?.scrollIntoView({behavior:"smooth",block:"start"});
 
-  const toggleCart = (id: number) => setCart(p => ({...p, [id]: p[id] ? 0 : 1}));
+  const toggleCart = (id) => setCart(p => ({...p, [id]: p[id] ? 0 : 1}));
   const cartCount  = Object.values(cart).filter(Boolean).length;
   const cartTotal  = WINES.reduce((s,w) => s + (cart[w.id]||0)*w.price, 0);
 
@@ -551,7 +566,8 @@ export default function SalveRegina() {
       {/* ── NAV ─────────────────────────────────── */}
       <nav className={`nav${scrolled?" scrolled":""}`}>
         <a className="nav-logo" onClick={() => go("hero")}>
-          <img src="/salve-regina---logo.png" alt="Salve Regina" style={{height:'52px',width:'auto'}} />
+          <span className="logo-main">Salve Regina</span>
+          <span className="logo-sub">Winnica · Lubelszczyzna</span>
         </a>
         <ul className="nav-links">
           {[["about","O nas"],["wines","Wina"],["shop","Sklep"],["contact","Kontakt"]].map(([id,lbl])=>(
@@ -606,13 +622,14 @@ export default function SalveRegina() {
                 Tradycja, <em>terroir</em><br/>i pasja do bąbelków
               </h2>
               <p className="about-lead reveal reveal-delay-2">
-                Winnica Salve Regina powstała z miłości do ziemi lubelskiej i wiary,
-                że polskie klimaty rodzą wybitne wina musujące.
+                Winnica Salve Regina powstała w 2023 roku z miłości do ziemi lubelskiej.
+                W tym roku czekamy na pierwsze zbiory z naszych 2,2 ha winorośli.
               </p>
               <p className="about-body reveal reveal-delay-3">
-                Leżymy na wzgórzach wsi Kaznów, kilka kilometrów od Ostrowa Lubelskiego.
-                Łagodne stoki, wapienne gleby i długie, słoneczne lata tworzą wyjątkowy
-                mikroklimat dla Chardonnay, Pinot Noir i Pinot Meunier.
+                Leżymy na wzgórzach wsi Kaznów koło Ostrowa Lubelskiego. Łagodne stoki
+                i słoneczne lata tworzą wyjątkowy mikroklimat. Nasadzone mamy:
+                Solaris, Muscaris, Regent, Zweigelt, Chardonnay, Pinot Noir i Riesling
+                — z przewagą Solarisa, polskiego króla win.
               </p>
               <p className="about-body reveal reveal-delay-3">
                 Przez naszą winnicę przebiega historyczny Szlak Jagielloński — trakt,
@@ -625,7 +642,7 @@ export default function SalveRegina() {
                 leżakowania na osadzie. Wyraz miejsca, roku i rąk, które je stworzyły.
               </p>
               <div className="about-stats reveal reveal-delay-4">
-                {[["6 ha","Powierzchnia winnicy"],["2018","Rok założenia"],["100%","Metoda tradycyjna"],["4","Rodzaje win musujących"]].map(([n,l])=>(
+                {[["2,2 ha","Powierzchnia winnicy"],["2023","Rok założenia"],["100%","Metoda tradycyjna"],["4","Rodzaje win musujących"]].map(([n,l])=>(
                   <div key={l}>
                     <div className="stat-num">{n}</div>
                     <div className="stat-lbl">{l}</div>
