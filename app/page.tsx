@@ -565,6 +565,12 @@ export default function SalveRegina() {
     <>
       <style>{CSS}</style>
 
+      {/* ── ANNOUNCEMENT BAR ── */}
+      <div className="ann-bar">
+        <span className="ann-txt">PLEASE NOTE: Renovations &amp; deck construction May - November 2026</span>
+        <button className="ann-btn" onClick={() => go("wines")}>Poznaj nasze szczepy →</button>
+      </div>
+
       {/* ── NAV ─────────────────────────────────── */}
       <nav className={`nav${scrolled?" scrolled":""}`}>
         <ul className="nav-links">
