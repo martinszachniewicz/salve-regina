@@ -551,8 +551,7 @@ export default function SalveRegina() {
       {/* ── NAV ─────────────────────────────────── */}
       <nav className={`nav${scrolled?" scrolled":""}`}>
         <a className="nav-logo" onClick={() => go("hero")}>
-          <span className="logo-main">Salve Regina</span>
-          <span className="logo-sub">Winnica · Lubelszczyzna</span>
+          <img src="/salve-regina---logo.png" alt="Salve Regina" style={{height:'52px',width:'auto'}} />
         </a>
         <ul className="nav-links">
           {[["about","O nas"],["wines","Wina"],["shop","Sklep"],["contact","Kontakt"]].map(([id,lbl])=>(
